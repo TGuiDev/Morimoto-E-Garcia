@@ -1,0 +1,102 @@
+<%- include('../partials/admin/header'); %>
+<%- include('../partials/admin/navbar'); %>
+<style>
+    .navbar-dark {
+        position: fixed !important;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid rgba(256, 256, 256, 0.1);
+        z-index: 999;
+    }
+
+    .bg-header {
+        background: linear-gradient(rgba(9, 30, 62, 0.7), rgba(9, 30, 62, 0.7)), url(../img/banners/advogado.jpg) center center no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<% if (successMessage) { %>
+    <div class="alert alert-success" id="success">
+        <%= successMessage %>
+    </div>
+<% } %>
+
+<div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px">
+    <div class="row py-5">
+        <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+            <h1 class="display-4 text-white animated zoomIn">Painel de Admin</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container ">
+    <div class="row gap-2">
+        <div class="col-md">
+            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
+                data-bs-target="#modalOpcaoMenu1">
+                <img src="../img/opcoes/novocliente.png" alt="Opção 1" class="img-fluid" />
+                <div class="mt-2">Clientes</div>
+            </button>
+        </div>
+        <div class="col-md">
+            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
+                data-bs-target="#modaladdlogin">
+                <img src="../img/opcoes/novologin.png" alt="Opção 3" class="img-fluid" />
+                <div class="mt-2">Usuários de Login</div>
+            </button>
+        </div>
+        <div class="col-md">
+            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
+                data-bs-target="#modaladdlogin">
+                <img src="../img/opcoes/declaracao.png" alt="Opção 3" class="img-fluid" />
+                <div class="mt-2">Procuração / Declaração</div>
+            </button>
+        </div>
+        <!-- <div class="col-md">
+            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
+                data-bs-target="#modaladdgrupo">
+                <img src="../img/opcoes/grupo-cliente.png" alt="Opção 2" class="img-fluid" />
+                <div class="mt-2">Grupo de Clientes</div>
+            </button>
+        </div> -->
+        <div class="col-md">
+            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
+                data-bs-target="#modalOpcao4">
+                <img src="../img/opcoes/notas.png" alt="Opção 4" class="img-fluid" />
+                <div class="mt-2">Recibo</div>
+            </button>
+        </div>
+        <div class="col-md">
+            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
+                data-bs-target="#modalOpcao4">
+                <img src="../img/opcoes/email.png" alt="Opção 4" class="img-fluid" />
+                <div class="mt-2">Form de Contato</div>
+            </button>
+        </div>
+        <div class="col-md">
+            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
+                data-bs-target="#modalOpcao5">
+                <img src="../img/opcoes/backup.png" alt="Opção 5" class="img-fluid" />
+                <div class="mt-2">Backup</div>
+            </button>
+        </div>
+        <div class="col-md">
+            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
+                data-bs-target="#modalnovanoticia">
+                <img src="../img/opcoes/postagem.png" alt="Opção 5" class="img-fluid" />
+                <div class="mt-2">Postagem</div>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<%- include('./partials/menucliente.ejs'); %>
+<%- include('./partials/cadnovocliente.ejs'); %>
+<%- include('./partials/cadnovologin.ejs'); %>
+<%- include('./partials/cadgrupodeclientes.ejs'); %>
+<%- include('./partials/cadnovanoticia.ejs'); %>
+
+
+<%- include('../partials/footer'); %>

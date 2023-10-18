@@ -1,0 +1,31 @@
+<div class="modal fade" id="modaladdgrupo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999999;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Criar grupo de Login
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/cadgrupodeclientes" method="post">
+                    <div class="mb-3">
+                        <label for="nomedogrupo" class="form-label">Nome do Grupo de Clientes</label>
+                        <input name="nomedogrupo" type="text" class="form-control" style="border-radius: 5px"
+                            id="nomedogrupo" placeholder="Nome do Grupo" />
+                    </div>
+                    <div style="width: 100%; height: 50px !important;">
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-danger px-3" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-circle-xmark"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-success px-3">
+                            <i class="fa-solid fa-circle-plus"></i> Criar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

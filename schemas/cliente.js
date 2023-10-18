@@ -1,43 +1,106 @@
 const mongoose = require('mongoose');
 
 const clienteSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        unique: true,
+    },
     info: {
         nome: {
             type: String,
-            required: true,
-        },
-        cpf: {
-            type: String,
-            unique: true,
-            required: true,
         },
         dataNascimento: {
             type: Date,
-            required: true,
+        },
+        cpf: {
+            type: String,
+        },
+        rg: {
+            type: String,
+        },
+        cnpj: {
+            type: String,
+        },
+        inscricaoEstadual: {
+            type: String,
         },
         endereco: {
-            rua: String,
-            cidade: String,
-            estado: String,
-            cep: String,
+            cidade: {
+                type: String,
+            },
+            cep: {
+                type: String,
+            },
+            bairro: {
+                type: String,
+            },
+            endereco: {
+                type: String,
+            },
+            numero: {
+                type: String,
+            },
+            uf: {
+                type: String,
+            },
+            complemento: {
+                type: String,
+            },
         },
-        contatos: {
-            email: String,
-            telefone: String,
+        contato: {
+            telCelular1: {
+                type: String,
+            },
+            telCelular2: {
+                type: String,
+            },
+            telResidencial: {
+                type: String,
+            },
+            telComercial: {
+                type: String,
+            },
+        },
+        outros: {
+            complementos: {
+                nomepai: {
+                    type: String,
+                },
+                nomemae: {
+                    type: String,
+                },
+                nomeempresa: {
+                    type: String,
+                },
+                cargoempresa: {
+                    type: String,
+                },
+                trabalhadesde: {
+                    type: Date,
+                },
+            },
+            site: {
+                type: String,
+            },
+            email: {
+                type: String,
+            },
+        },
+        observacoes: {
+            type: String,
         },
     },
-    notas: [
+    servicos: [
         {
             data: {
                 type: Date,
-                default: Date.now
+                default: Date.now,
             },
             texto: String,
-        }
-    ]
+        },
+    ],
 });
 
-const Cliente = mongoose.model('Cliente', clienteSchema);
-module.exports = Cliente;
+const Cliente = mongoose.model('Clientes', clienteSchema);
 
-console.log(Cliente);
+module.exports = Cliente;

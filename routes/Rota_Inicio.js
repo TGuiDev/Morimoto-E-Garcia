@@ -3,9 +3,9 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    res.render('Home/');
+    res.render('Home/', { currentUser: res.locals.currentUser, message: '' });
   } catch (error) {
-    res.render('Home/');
+    res.render('Home/', { currentUser: res.locals.currentUser, message: '' });
   }
 });
 

@@ -1,0 +1,167 @@
+<%- include('../partials/header'); %>
+<%- include('../partials/navbar'); %>
+<title>Clientes</title>
+<style>
+    .navbar-dark {
+        position: fixed !important;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid rgba(256, 256, 256, 0.1);
+        z-index: 999;
+    }
+
+    .bg-header {
+        background: linear-gradient(rgba(9, 30, 62, 0.7), rgba(9, 30, 62, 0.7)), url(../img/banners/advogado.jpg) center center no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px">
+    <div class="row py-5">
+        <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+            <h1 class="display-4 text-white animated zoomIn">Painel de Admin</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 d-flex gap-4 flex-column">
+    <h1>Visualização do Cliente</h1>
+    <hr>
+
+    <!-- Dados Pessoais -->
+    <div>
+        <h2>Dados Pessoais</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Nome:</strong> <%= cliente.info.nome %></p>
+                <p><strong>Data de Nascimento:</strong> <%= cliente.info.dataNascimento %></p>
+                <p><strong>CPF:</strong> <%= cliente.info.cpf %></p>
+                <p><strong>RG:</strong> <%= cliente.info.rg %></p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>CNPJ:</strong> <%= cliente.info.cnpj %></p>
+                <p><strong>Inscrição Estadual:</strong> <%= cliente.info.inscricaoEstadual %></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Endereço -->
+    <div>
+        <h2>Endereço</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Cidade:</strong> <%= cliente.info.endereco.cidade %></p>
+                <p><strong>CEP:</strong> <%= cliente.info.endereco.cep %></p>
+                <p><strong>Bairro:</strong> <%= cliente.info.endereco.bairro %></p>
+                <p><strong>Endereço:</strong> <%= cliente.info.endereco.endereco %></p>
+                <p><strong>Número:</strong> <%= cliente.info.endereco.numero %></p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>UF:</strong> <%= cliente.info.endereco.uf %></p>
+                <p><strong>Complemento:</strong> <%= cliente.info.endereco.complemento %></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contato -->
+    <div>
+        <h2>Contato</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Telefone Celular 1:</strong> <%= cliente.info.contato.telCelular1 %></p>
+                <p><strong>Telefone Celular 2:</strong> <%= cliente.info.contato.telCelular2 %></p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Telefone Residencial:</strong> <%= cliente.info.contato.telResidencial %></p>
+                <p><strong>Telefone Comercial:</strong> <%= cliente.info.contato.telComercial %></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Outros -->
+    <div>
+        <h2>Outros</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Nome do Pai:</strong> <%= cliente.info.outros.complementos.nomepai %></p>
+                <p><strong>Nome da Mãe:</strong> <%= cliente.info.outros.complementos.nomemae %></p>
+                <p><strong>Nome da Empresa:</strong> <%= cliente.info.outros.complementos.nomeempresa %></p>
+                <p><strong>Cargo na Empresa:</strong> <%= cliente.info.outros.complementos.cargoempresa %></p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Trabalha desde:</strong> <%= cliente.info.outros.complementos.trabalhadesde %></p>
+                <p><strong>Site:</strong> <%= cliente.info.outros.site %></p>
+                <p><strong>Email:</strong> <%= cliente.info.outros.email %></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Observações -->
+    <div>
+        <h2>Observações</h2>
+        <div class="row">
+            <p><%= cliente.info.observacoes %></p>
+        </div>
+    </div>
+    
+</div>
+
+<button class="btn btn-primary btn-print" onclick="imprimirPerfil()">Imprimir Perfil</button>
+
+<%- include('../partials/footer'); %>
+
+<script>
+    function imprimirPerfil() {
+    // Define as opções da janela pop-up
+    const opcoes = 'width=1600,height=1200,toolbar=no,scrollbars=no,resizable=yes';
+
+    // Abre a janela pop-up
+    const janelaDeImpressao = window.open('', '', opcoes);
+
+    // Verifique se a janela foi aberta com sucesso
+    if (janelaDeImpressao) {
+        // Crie o conteúdo HTML para a folha de impressão
+        const conteudoImprimir = `
+            <!DOCTYPE html>
+            <html lang="pt-BR">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="stylesheet" href="seu-estilo.css">
+            </head>
+            <body>
+                <div class="container mt-5">
+                    DECLARAÇÃO DE ESTADO DE POBREZA PARA FINS JUDICIAIS
+
+
+                    ELTON  RODRIGO DA SILVA, brasileiro, solteiro, operador de empilhadeira desempregado, portador da cédula de identidade RG/SSP nº: 46.805.651-8, inscrito no CPF/MF nº: 315.157.858-66, residente e domiciliado à Rua Alfredo Balsachi, 05, Santa Clara Espírito Santo do Pinhal, São Paulo, CEP: 13.990-000, venho declarar que, em razão de minha atual condição financeira, não tenho condições de arcar com nenhum tipo de pagamento de custos processuais, sob pena de implicar em prejuízo próprio e de minha família, nos termos do Art. 5º, LXXIV, da Constituição da República, da Lei nº 1.060/50, bem como nos artigos 82 e 98 do Novo Código de Processo Civil.
+
+                    Reiterando minha incapacidade de custear quaisquer ações, quero solicitar, ainda, que tal benefício abranja todos os atos do processo, de acordo com o artigo 98 do novo Código de Processo Civil. 
+                      
+                     
+                                Espírito Santo do Pinhal, 06 de setembro de 2023.
+
+                    
+                                                
+                                ELTON  RODRIGO DA SILVA
+                </div>
+            </body>
+            </html>
+        `;
+
+        // Escreva o conteúdo na janela pop-up
+        janelaDeImpressao.document.write(conteudoImprimir);
+
+        // Fecha a janela pop-up após a impressão
+        janelaDeImpressao.onafterprint = function () {
+            janelaDeImpressao.close();
+        };
+
+        // Iniciar a função de impressão na janela pop-up
+        janelaDeImpressao.print();
+    } else {
+        alert("Por favor, desabilite o bloqueio de pop-ups para imprimir.");
+    }
+}
+</script>

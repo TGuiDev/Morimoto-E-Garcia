@@ -1,0 +1,53 @@
+<%- include('../partials/admin/header'); %>
+<%- include('../partials/admin/navbar'); %>
+<style>
+    .navbar-dark {
+        position: fixed !important;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid rgba(256, 256, 256, .1);
+        z-index: 999;
+    }
+    .bg-header {
+        background: linear-gradient(rgba(9, 30, 62, 0.7), rgba(9, 30, 62, 0.7)), url(../img/banners/orcamento.jpg) center center no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
+    <div class="row py-5">
+        <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+            <h1 class="display-4 text-white animated zoomIn">Formulário Orçamento Grátis</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Tabela de Dados</h1>
+    <table class="table table-dark table-striped" style="border-radius: 5px !important; overflow: hidden;">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Mensagem</th>
+                <th scope="col">Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aqui você pode iterar sobre seus dados e criar linhas da tabela -->
+            <% userData.forEach(function(user) { %>
+                <tr>
+                    <td style="min-width: 200px !important; padding: 14px;"><%= user.Nome %></td>
+                    <td style="min-width: 200px !important; padding: 14px;"><%= user.Telefone %></td>
+                    <td style="min-width: 200px !important; padding: 14px;"><%= user.Categoria %></td>
+                    <td style="min-width: 200px !important; padding: 14px;"><%= user.Mensagem %></td>
+                    <td style="min-width: 200px !important; padding: 14px;"><%= user.Data %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../partials/footer'); %>

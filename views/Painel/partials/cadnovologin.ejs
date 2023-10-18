@@ -1,0 +1,44 @@
+<div class="modal fade" id="modaladdlogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Gerenciamento de Login
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/cadnovousuario" method="post">
+                    <div class="mb-3">
+                        <label for="newnomelogin" class="form-label">Nome do Usuário</label>
+                        <input name="newnomelogin" type="text" class="form-control" style="border-radius: 5px"
+                            id="newnomelogin" placeholder="Nome de Usuário" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="newemaillogin" class="form-label">Email</label>
+                        <input name="newemaillogin" type="email" class="form-control" style="border-radius: 5px"
+                            id="newemaillogin" placeholder="Email de Acesso" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="newsenhalogin" class="form-label">Senha</label>
+                        <input name="newsenhalogin" type="password" class="form-control"
+                            style="border-radius: 5px" id="newsenhalogin" placeholder="Senha de Acesso" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="newacessologin" class="form-label">Nível de Acesso</label>
+                        <input name="newacessologin" type="text" class="form-control" style="border-radius: 5px"
+                            id="newacessologin" placeholder="Nível de acesso" />
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-danger px-3" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-circle-xmark"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-success px-3">
+                            <i class="fa-solid fa-circle-plus"></i> Criar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
