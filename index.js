@@ -1,4 +1,4 @@
-// console.clear();
+console.clear();
 require("colors");
 const express = require("express");
 const session = require("express-session");
@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 require("dotenv").config();
 const app = express();
+const Admin = require('./schemas/admin');
 
 // Configurações do Express
 app.set("view engine", "ejs");
@@ -51,24 +52,32 @@ mongoose
 // Rotas
 const Erro = require("./routes/Rota_Erro");
 const Login = require("./routes/Rota_Login");
+const Editar = require("./routes/Rota_Editar");
 const Logout = require("./routes/Rota_Logout");
 const Inicio = require("./routes/Rota_Inicio");
 const Noticia = require("./routes/Rota_Noticia");
-const Orcamento = require("./routes/Rota_Orcamento");
+const Deletar = require("./routes/Rota_Deletar");
 const Noticias = require("./routes/Rota_Noticias");
-const CadNoticia = require("./routes/Rota_CadNoticia");
+const Contatar = require("./routes/Rota_Contatar");
+const Atualizar = require("./routes/Rota_Atualizar");
+const Orcamento = require("./routes/Rota_Orcamento");
 const AreaAdmin = require("./routes/Rota_AreaAdmin");
-const VerClientes = require("./routes/RotaVerClientes");
+const CadNoticia = require("./routes/Rota_CadNoticia");
 const CadClientes = require("./routes/Rota_CadCliente");
+const VerClientes = require("./routes/Rota_VerClientes");
 const CadOrcamento = require("./routes/Rota_CadOrcamento");
 const CadNovoUsuario = require("./routes/Rota_CadastroNovoUsuario");
 
 app.use("/", Inicio);
 app.use("/erro", Erro);
 app.use("/login", Login);
+app.use("/editar", Editar);
 app.use("/logout", Logout);
 app.use("/noticia", Noticia);
+app.use("/deletar", Deletar);
 app.use("/noticias", Noticias);
+app.use("/contatar", Contatar);
+app.use("/atualizar", Atualizar);
 app.use("/orcamento", Orcamento);
 app.use("/clientes", VerClientes);
 app.use("/cadnoticia", CadNoticia);
@@ -77,12 +86,16 @@ app.use("/cadorcamento", CadOrcamento);
 app.use("/cadnovocliente", CadClientes);
 app.use("/cadnovousuario", CadNovoUsuario);
 
-// app.use((req, res) => {
-//   res.redirect("/erro");
-// });
+const Backup = require("./routes/Rota_Backup");
+app.use("/backup", Backup);
+
+
+app.use((req, res) => {
+  res.redirect("/erro");
+});
 
 const porta = process.env.PORT || 1010;
-app.listen(porta, () => {
+app.listen(porta, async () => {
   console.log(
     `👍 | Site Iniciado  |`.white + ` http://localhost:${porta}`.rainbow
   );

@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
-const fs = require("fs");
 const Cliente = require('../schemas/cliente');
+const VerificarLogin = require('../middleware/VerificarLogin');
 
-router.post('/', async (req, res) => {
+router.post('/', VerificarLogin, async (req, res) => {
     try {
         // Gerar um ID único para o cliente
         const clientId = uuidv4();
@@ -38,43 +38,46 @@ router.post('/', async (req, res) => {
             observacoes,
         } = req.body;
 
+
+        console.log(uf)
+
         // Criar um objeto cliente com os dados do formulário
         const cliente = new Cliente({
             id: clientId,
             info: {
-                nome,
-                dataNascimento,
-                cpf,
-                rg,
-                cnpj,
-                inscricaoEstadual,
+                nome: nome || 'Não Informado',
+                dataNascimento: dataNascimento || 'Não Informado',
+                cpf: cpf || 'Não Informado',
+                rg: rg || 'Não Informado',
+                cnpj: cnpj || 'Não Informado',
+                inscricaoEstadual: inscricaoEstadual || 'Não Informado',
                 endereco: {
-                    cidade,
-                    cep,
-                    bairro,
-                    endereco,
-                    numero,
-                    uf,
-                    complemento,
+                    cidade: cidade || 'Não Informado',
+                    cep: cep || 'Não Informado',
+                    bairro: bairro || 'Não Informado',
+                    endereco: endereco || 'Não Informado',
+                    numero: numero || 'Não Informado',
+                    uf: uf || 'Não Informado',
+                    complemento: complemento || 'Não Informado',
                 },
                 contato: {
-                    telCelular1,
-                    telCelular2,
-                    telResidencial,
-                    telComercial,
+                    telCelular1: telCelular1 || 'Não Informado',
+                    telCelular2: telCelular2 || 'Não Informado',
+                    telResidencial: telResidencial || 'Não Informado',
+                    telComercial: telComercial || 'Não Informado',
                 },
                 outros: {
                     complementos: {
-                        nomepai,
-                        nomemae,
-                        nomeempresa,
-                        cargoempresa,
-                        trabalhadesde,
+                        nomepai: nomepai || 'Não Informado',
+                        nomemae: nomemae || 'Não Informado',
+                        nomeempresa: nomeempresa || 'Não Informado',
+                        cargoempresa: cargoempresa || 'Não Informado',
+                        trabalhadesde: trabalhadesde || 'Não Informado',
                     },
-                    site,
-                    email,
+                    site: site || 'Não Informado',
+                    email: email || 'Não Informado',
                 },
-                observacoes,
+                observacoes: observacoes || 'Não Informado',
             },
         });
 
@@ -87,6 +90,5 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: 'Erro ao cadastrar o cliente' });
     }
 });
-
 
 module.exports = router;

@@ -21,6 +21,15 @@ const formSchema = new mongoose.Schema({
     },
     data: {
         type: String,
+    },
+    atendimento: {
+        status: {
+            type: Boolean,
+            default: 0,
+        },
+        responsavel: {
+            type: String,
+        },
     }
 });
 

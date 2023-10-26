@@ -46,7 +46,7 @@
                     </div>
                 </div> -->
                 <% if (currentUser) { %>
-                    <a href="/painel-admin" class="nav-item nav-link" style="display: flex; gap: 10px; justify-content: center; align-items: center;"><img src="<%= currentUser.info.avatar %>" alt="" style="width: 20px; height: 20px; margin: auto; border-radius: 50%;">Painel Admin</a>
+                    <a href="/painel-admin" class="nav-item nav-link" style="display: flex; gap: 10px; justify-content: center; align-items: center;"><img src="<%= currentUser.info.avatar %>" alt="" style="width: 20px; height: 20px; margin: auto; border-radius: 50%;">Painel: <%= currentUser.info.nome %></a>
                     <a href="/logout" class="nav-item nav-link sair">Sair</a>
                 <% }  else { %>
                     <a href="/login" class="nav-item nav-link">Entrar</a>

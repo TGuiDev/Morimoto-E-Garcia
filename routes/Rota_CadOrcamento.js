@@ -5,11 +5,12 @@ const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
 const Form = require("../schemas/form");
 const fs = require("fs");
+const VerificarLogin = require('../middleware/VerificarLogin');
 
 // Middleware para analisar JSON
 router.use(express.json());
 
-router.post("/", async (req, res) => {
+router.post("/", VerificarLogin, async (req, res) => {
   const currentDate = new Date();
   const formattedDate = format(currentDate, "dd/MM/yyyy HH:mm:ss");
 //   console.log(formattedDate);
@@ -22,6 +23,9 @@ router.post("/", async (req, res) => {
       categoria: req.body.categoria,
       mensagem: req.body.mensagem,
       data: formattedDate,
+      atendimento: {
+        responsavel: null
+      }
     });
 
     // console.log(newpost);

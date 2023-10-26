@@ -14,7 +14,12 @@
         background-size: cover;
     }
 </style>
-<div id="message" class="err display-none"><%= message %></div> 
+
+<% if (message) { %>
+    <div class="alert alert-danger" id="alerta-login">
+        <%= message %>
+    </div>
+<% } %>
 
 <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
     <div class="row py-5">

@@ -10,7 +10,7 @@ const clienteSchema = new mongoose.Schema({
             type: String,
         },
         dataNascimento: {
-            type: Date,
+            type: String,
         },
         cpf: {
             type: String,
@@ -76,7 +76,7 @@ const clienteSchema = new mongoose.Schema({
                     type: String,
                 },
                 trabalhadesde: {
-                    type: Date,
+                    type: String,
                 },
             },
             site: {
@@ -96,7 +96,9 @@ const clienteSchema = new mongoose.Schema({
                 type: Date,
                 default: Date.now,
             },
-            texto: String,
+            texto: {
+                type: String,
+            }
         },
     ],
 });

@@ -26,6 +26,39 @@
 </div>
 
 <div class="container mt-5 d-flex gap-4 flex-column">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/clientes" class="btn bg-warning br-10 text-white">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+            </a>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="#" class="btn bg-success br-10 text-white">
+                <i class="fa fa-plus" aria-hidden="true"></i> Adicionar Serviço
+            </a>
+            <!-- <a href="/deletar/<%= cliente._id %>" id="btnDeletar" class="btn bg-danger br-10 text-white">
+                <i class="fa fa-trash" aria-hidden="true"></i> Deletar Cliente
+            </a> -->
+
+            <% if (currentUser.credencial.acesso == 'SA' || currentUser.credencial.acesso == 'A') { %>
+                <a href="/editar/<%= cliente._id %>" class="btn btn-primary br-10 text-white">
+                    <i class="fa fa-pen" aria-hidden="true"></i> Editar
+                </a>
+            <% }  else { %>
+                    
+            <% } %>
+            
+            <% if (currentUser.credencial.acesso == 'SA') { %>
+                <button class="btn btn-danger text-white " data-bs-toggle="modal" id="btnDeletar" data-bs-target="#confirmDeleteModal">
+                    <i class="fa fa-trash" aria-hidden="true"></i> Deletar Cliente
+                </button>
+            <% }  else { %>
+
+            <% } %>
+            
+        </div>
+    </div>
+    
     <h1>Visualização do Cliente</h1>
     <hr>
 
@@ -33,9 +66,9 @@
     <div>
         <h2>Dados Pessoais</h2>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 infos-pessoais">
                 <p><strong>Nome:</strong> <%= cliente.info.nome %></p>
-                <p><strong>Data de Nascimento:</strong> <%= cliente.info.dataNascimento %></p>
+                <p><strong>Data de Nascimento:</strong> <span class="testeee"><%= cliente.info.dataNascimento %></span></p>
                 <p><strong>CPF:</strong> <%= cliente.info.cpf %></p>
                 <p><strong>RG:</strong> <%= cliente.info.rg %></p>
             </div>
@@ -107,9 +140,11 @@
     
 </div>
 
-<button class="btn btn-primary btn-print" onclick="imprimirPerfil()">Imprimir Perfil</button>
+<!-- <button class="btn btn-primary btn-print" onclick="imprimirPerfil()">Imprimir Perfil</button> -->
 
+<%- include('./partials/excluir'); %>
 <%- include('../partials/footer'); %>
+
 
 <script>
     function imprimirPerfil() {
@@ -164,4 +199,27 @@
         alert("Por favor, desabilite o bloqueio de pop-ups para imprimir.");
     }
 }
+
+
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+    // Converter a data de texto em um objeto de data
+    const dateObj = new Date(date);
+
+    // Adicionar 1 dia à data
+    dateObj.setDate(dateObj.getDate() + 1);
+
+    // Formatar a data ajustada
+    return dateObj.toLocaleDateString('pt-BR', options);
+}
+
+const dataNascElements = document.querySelectorAll('.testeee');
+dataNascElements.forEach(element => {
+    element.textContent = formatDate(element.textContent);
+});
+
+
+
+
 </script>

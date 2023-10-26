@@ -6890,6 +6890,7 @@ fieldset:disabled .btn {
 }
 .roundeding {
   border-radius: 50% 50% 2px 2px !important;
+  min-width: 210px;
 }
 .rounded-0 {
   border-radius: 0 !important;

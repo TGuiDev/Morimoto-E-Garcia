@@ -1,4 +1,4 @@
-<div class="modal fade" id="modaladdlogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modaladdservico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,14 +8,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/cadnovousuario" method="post">
+                <form action="/addservico/<%= cliente._id %>" method="post">
                     <div class="mb-3">
-                        <label for="newnomelogin" class="form-label">Nome do Usuário</label>
+                        <label for="newnomelogin" class="form-label">Serviço Prestado</label>
                         <input name="newnomelogin" type="text" class="form-control" style="border-radius: 5px"
                             id="newnomelogin" placeholder="Nome de Usuário" />
                     </div>
                     <div class="mb-3">
-                        <label for="newemaillogin" class="form-label">Email</label>
+                        <label for="newemaillogin" class="form-label">Valor</label>
                         <input name="newemaillogin" type="email" class="form-control" style="border-radius: 5px"
                             id="newemaillogin" placeholder="Email de Acesso" />
                     </div>

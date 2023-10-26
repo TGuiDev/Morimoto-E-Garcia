@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
 const Admin = require("../schemas/admin");
+const VerificarLogin = require('../middleware/VerificarLogin');
 
 // Middleware para analisar JSON
 router.use(express.json());
 
-router.post("/", async (req, res) => {
+router.post("/", VerificarLogin, async (req, res) => {
   try {
     const newLogin = new Admin({
       Id: generateRandomId(),
@@ -29,9 +30,11 @@ router.post("/", async (req, res) => {
   }
 });
 
+module.exports = router;
+
+
+
 function generateRandomId() {
     const uniqueId = uuidv4();
     return uniqueId;
   }
-
-module.exports = router;

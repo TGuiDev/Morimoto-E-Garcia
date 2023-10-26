@@ -1,0 +1,83 @@
+{
+  "clientes": [
+    {
+      "info": {
+        "endereco": {
+          "cidade": "Espírito Santo do Pinhal",
+          "cep": "13990000",
+          "bairro": "Jardim nova Pinhal",
+          "endereco": "Rua Monsenhor José Mendes",
+          "numero": "3",
+          "uf": "SP",
+          "complemento": "Apt 21, Bloco 2"
+        },
+        "contato": {
+          "telCelular1": "(19) 97102-0430",
+          "telCelular2": "(19) 99989-7566",
+          "telResidencial": "Não Informado",
+          "telComercial": "Não Informado"
+        },
+        "outros": {
+          "complementos": {
+            "nomepai": "Marcelo dos Santos",
+            "nomemae": "Silnea Aparecida Cabral dos Santos",
+            "nomeempresa": "Pinhalense",
+            "cargoempresa": "Técnico em manutenção de máquinas",
+            "trabalhadesde": "2023-02-03"
+          },
+          "site": "Não Informado",
+          "email": "isadoracabral666@gmail.com"
+        },
+        "nome": "Isadora Cabral do Guilherme",
+        "dataNascimento": "2004-11-16",
+        "cpf": "481.221.178-64",
+        "rg": "054.620.53",
+        "cnpj": "Não Informado",
+        "inscricaoEstadual": "Não Informado",
+        "observacoes": "Gosta de grudar nas orelinha do guidev"
+      },
+      "_id": "653997cfe47339de79b730bf",
+      "id": "610e3cd8-2ce9-4e36-a18b-25e20a76afd6",
+      "servicos": [],
+      "__v": 0
+    }
+  ],
+  "admins": [
+    {
+      "info": { "nome": "GuiDev", "avatar": "https://imgur.com/7ZBYzXG.png" },
+      "credencial": {
+        "email": "gui@admin.com",
+        "senha": "1234",
+        "acesso": "SA"
+      },
+      "_id": "6539962ca0683fb05138d621",
+      "Id": "iuasdhdf09a7sd79687y1gye12",
+      "__v": 0
+    },
+    {
+      "info": { "nome": "Isadora", "avatar": "https://imgur.com/7ZBYzXG.png" },
+      "credencial": {
+        "email": "isa@admin.com",
+        "senha": "1234",
+        "acesso": "U"
+      },
+      "_id": "65399827e47339de79b730c6",
+      "Id": "00050e48-d43a-45a9-893c-ddb21067b062",
+      "__v": 0
+    }
+  ],
+  "forms": [
+    {
+      "atendimento": { "status": true, "responsavel": "GuiDev" },
+      "_id": "65399880e47339de79b730c9",
+      "id": "80a80ef8-a888-45a5-b0dc-ebcb57c92650",
+      "nome": "Isadora Cabral",
+      "telefone": "(19) 97102-0430",
+      "categoria": "Direito Criminal",
+      "mensagem": "",
+      "data": "25/10/2023 19:36:48",
+      "__v": 0
+    }
+  ],
+  "noticias": []
+}

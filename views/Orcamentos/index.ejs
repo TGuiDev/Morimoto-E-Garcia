@@ -24,10 +24,19 @@
 </div>
 
 <div class="container">
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <a href="/painel-admin" class="btn bg-warning br-10 text-white">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+            </a>
+        </div>
+    </div>
     <h1>Tabela de Dados</h1>
     <table class="table table-dark table-striped" style="border-radius: 5px !important; overflow: hidden;">
         <thead>
             <tr>
+                <th scope="col">Atendente</th>
+                <th scope="col">Status</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Telefone</th>
                 <th scope="col">Categoria</th>
@@ -39,15 +48,30 @@
             <!-- Aqui você pode iterar sobre seus dados e criar linhas da tabela -->
             <% userData.forEach(function(user) { %>
                 <tr>
-                    <td style="min-width: 200px !important; padding: 14px;"><%= user.Nome %></td>
-                    <td style="min-width: 200px !important; padding: 14px;"><%= user.Telefone %></td>
-                    <td style="min-width: 200px !important; padding: 14px;"><%= user.Categoria %></td>
-                    <td style="min-width: 200px !important; padding: 14px;"><%= user.Mensagem %></td>
-                    <td style="min-width: 200px !important; padding: 14px;"><%= user.Data %></td>
+                    <% if( user.Atendimento.Responsavel == null ){ %>
+                        <td style="min-width: 200px !important;">
+                            <a href="/contatar/<%= user.ID %>" class="btn btn-success text-white ">Confirmar</a>
+                        </td>
+                    <% } else { %>
+                        <td style="min-width: 200px !important; padding: 14px"><%= user.Atendimento.Responsavel %></td>
+                    <% }  %>
+                    <td style="min-width: 200px !important; padding: 14px">
+                        <% if( user.Atendimento.Status == 1 ){ %>
+                            <span class="text-warning ">Atendido</span>
+                        <% } else { %>
+                            <span class="text-danger">Não Atendido</span>
+                        <% }  %>
+                    </td>
+                    <td style="min-width: 200px !important; padding: 14px"><%= user.Nome %></td>
+                    <td style="min-width: 200px !important; padding: 14px"><%= user.Telefone %></td>
+                    <td style="min-width: 200px !important; padding: 14px"><%= user.Categoria %></td>
+                    <td style="min-width: 200px !important; padding: 14px"><%= user.Mensagem %></td>
+                    <td style="min-width: 200px !important; padding: 14px"><%= user.Data %></td>
                 </tr>
             <% }); %>
         </tbody>
     </table>
 </div>
+
 
 <%- include('../partials/footer'); %>

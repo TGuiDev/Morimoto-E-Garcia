@@ -6,11 +6,12 @@ const multer = require("multer");
 const Noticia = require("../schemas/noticia");
 const Admin = require('../schemas/admin');
 const fs = require("fs");
+const VerificarLogin = require('../middleware/VerificarLogin');
 
 // Middleware para analisar JSON
 router.use(express.json());
 
-router.post("/", async (req, res) => {
+router.post("/", VerificarLogin, async (req, res) => {
   let usuarioLogadoNome;
   let usuarioLogadoFoto;
   const usuarioLogadoId = req.session.user; 

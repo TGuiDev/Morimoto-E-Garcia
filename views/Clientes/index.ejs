@@ -17,6 +17,12 @@
     }
 </style>
 
+<% if (successMessage) { %>
+    <div class="alert alert-success" id="success">
+        <%= successMessage %>
+    </div>
+<% } %>
+
 <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px">
     <div class="row py-5">
         <div class="col-12 pt-lg-5 mt-lg-5 text-center">
@@ -26,51 +32,73 @@
 </div>
 
 <div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <a href="/painel-admin" class="btn bg-warning br-10 text-white">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+            </a>
+        </div>
+    </div>
     <h1 class="mb-4">Clientes Cadastrados</h1>
     <div class="mb-4">
-        <input type="text" id="cpfInput" class="form-control" placeholder="Pesquisar por CPF">
+        <input type="text" id="cpfInput" class="form-control" placeholder="Pesquisar">
     </div>
     <ul class="list-group" id="clientesList">
+        <div class="text-danger" id="noResults" style="display: none;">
+            Nenhum cliente encontrado.
+        </div>
         <% clientes.forEach(cliente => { %>
             <a href="/clientes/<%= cliente._id %>" class="list-group-item">
-                <p class="mb-0">Id: <%= cliente._id %></p>
+                <!-- <p class="mb-0">Id: <%= cliente._id %></p> -->
                 <p class="mb-0">Nome: <%= cliente.info.nome %></p>
                 <p class="mb-0">Data de Nascimento: <%= cliente.info.dataNascimento %></p>
                 <p class="mb-0">CPF: <%= cliente.info.cpf %></p>
+                <p class="mb-0">CNPJ: <%= cliente.info.cnpj %></p>
             </a>
         <% }); %>
     </ul>
-    <!-- Mensagem de aviso quando nenhum cliente é encontrado -->
-    <div class="alert alert-warning mt-4" id="noResults" style="display: none;">
-        Nenhum cliente encontrado com o CPF informado.
-    </div>
 </div>
 
 <%- include('../partials/footer'); %>
 
 
 <script>
+    // Função para formatar a data
+    function formatDate(date) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(date).toLocaleDateString('pt-BR', options);
+    }
+
     // Função para filtrar clientes com base no CPF digitado
     document.getElementById('cpfInput').addEventListener('input', function () {
-            const cpfInputValue = this.value.trim().toLowerCase();
-            const clientes = document.querySelectorAll('.list-group-item');
-            let foundResults = false;
+        const searchValue = this.value.trim().toLowerCase();
+        const clientes = document.querySelectorAll('.list-group-item');
+        let foundResults = false;
 
-            clientes.forEach(cliente => {
-                const cpfText = cliente.querySelector('p:nth-child(4)' || 'p:nth-child(2)' ).textContent.toLowerCase();
-                if (cpfText.includes(cpfInputValue)) {
-                    cliente.style.display = 'block';
-                    foundResults = true;
-                } else {
-                    cliente.style.display = 'none';
-                }
-            });
+        clientes.forEach(cliente => {
+            const nomeText = cliente.querySelector('p:nth-child(1)').textContent.toLowerCase();
+            const cpfText = cliente.querySelector('p:nth-child(3)').textContent.toLowerCase();
+            const cnpjText = cliente.querySelector('p:nth-child(4)').textContent.toLowerCase();
 
-            const noResults = document.getElementById('noResults');
-            if (foundResults) {
-                noResults.style.display = 'none';
+            if (nomeText.includes(searchValue) || cpfText.includes(searchValue) || cnpjText.includes(searchValue)) {
+                cliente.style.display = 'block';
+                foundResults = true;
             } else {
-                noResults.style.display = 'block';
+                cliente.style.display = 'none';
             }
         });
+
+        const noResults = document.getElementById('noResults');
+        if (foundResults) {
+            noResults.style.display = 'none';
+        } else {
+            noResults.style.display = 'block';
+        }
+    });
+
+    // Formate a data de nascimento dos clientes
+    const dataNascElements = document.querySelectorAll('.list-group-item p:nth-child(2)');
+    dataNascElements.forEach(element => {
+        element.textContent = 'Data de Nascimentoa: ' + formatDate(element.textContent);
+    });
 </script>

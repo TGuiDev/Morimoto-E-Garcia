@@ -30,58 +30,66 @@
     </div>
 </div>
 
-<div class="container ">
-    <div class="row gap-2">
-        <div class="col-md">
+<div class="container mt-5">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-2">
             <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
                 data-bs-target="#modalOpcaoMenu1">
                 <img src="../img/opcoes/novocliente.png" alt="Opção 1" class="img-fluid" />
                 <div class="mt-2">Clientes</div>
             </button>
         </div>
-        <div class="col-md">
+
+        <% if (currentUser.credencial.acesso == 'SA') { %>
+            <div class="col-md-2">
+                <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
+                    data-bs-target="#modaladdlogin">
+                    <img src="../img/opcoes/novologin.png" alt="Opção 3" class="img-fluid" />
+                    <div class="mt-2">Usuários de Login</div>
+                </button>
+            </div>
+            <% }  else { %>
+        <% } %>
+
+        <div class="col-md-2">
             <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
-                data-bs-target="#modaladdlogin">
-                <img src="../img/opcoes/novologin.png" alt="Opção 3" class="img-fluid" />
-                <div class="mt-2">Usuários de Login</div>
-            </button>
-        </div>
-        <div class="col-md">
-            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
-                data-bs-target="#modaladdlogin">
+                data-bs-target="#modalOpcaoMenuImprimir">
                 <img src="../img/opcoes/declaracao.png" alt="Opção 3" class="img-fluid" />
-                <div class="mt-2">Procuração / Declaração</div>
+                <div class="mt-2">Procuração e Declaração</div>
             </button>
         </div>
-        <!-- <div class="col-md">
-            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
-                data-bs-target="#modaladdgrupo">
-                <img src="../img/opcoes/grupo-cliente.png" alt="Opção 2" class="img-fluid" />
-                <div class="mt-2">Grupo de Clientes</div>
-            </button>
-        </div> -->
-        <div class="col-md">
+        <div class="col-md-2">
             <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
                 data-bs-target="#modalOpcao4">
                 <img src="../img/opcoes/notas.png" alt="Opção 4" class="img-fluid" />
                 <div class="mt-2">Recibo</div>
             </button>
         </div>
-        <div class="col-md">
-            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
-                data-bs-target="#modalOpcao4">
+    </div>
+    <div class="row mt-2 justify-content-center">
+        <div class="col-md-2">
+            <style>
+                a:hover {
+                    color: gray;
+                }
+            </style>
+            <a class="btn bg-secondary roundeding" href="/orcamento">
                 <img src="../img/opcoes/email.png" alt="Opção 4" class="img-fluid" />
                 <div class="mt-2">Form de Contato</div>
-            </button>
+            </a>
         </div>
-        <div class="col-md">
-            <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
-                data-bs-target="#modalOpcao5">
-                <img src="../img/opcoes/backup.png" alt="Opção 5" class="img-fluid" />
-                <div class="mt-2">Backup</div>
-            </button>
-        </div>
-        <div class="col-md">
+        
+        <% if (currentUser.credencial.acesso == 'SA') { %>
+            <div class="col-md-2">
+                <a class="btn bg-secondary roundeding" href="/backup">
+                    <img src="../img/opcoes/backup.png" alt="Opção 5" class="img-fluid" />
+                    <div class="mt-2">Backup</div>
+                </a>
+            </div>
+        <% }  else { %>
+            
+        <% } %>
+        <div class="col-md-2">
             <button class="btn bg-secondary roundeding" data-bs-toggle="modal"
                 data-bs-target="#modalnovanoticia">
                 <img src="../img/opcoes/postagem.png" alt="Opção 5" class="img-fluid" />
@@ -97,6 +105,9 @@
 <%- include('./partials/cadnovologin.ejs'); %>
 <%- include('./partials/cadgrupodeclientes.ejs'); %>
 <%- include('./partials/cadnovanoticia.ejs'); %>
+
+<%- include('./partials/menuimprimir.ejs'); %>
+<%- include('./partials/imprimirprocuracao.ejs'); %>
 
 
 <%- include('../partials/footer'); %>

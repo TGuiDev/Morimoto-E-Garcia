@@ -1,0 +1,277 @@
+<%- include('../partials/admin/header'); %>
+<%- include('../partials/admin/navbar'); %>
+<style>
+    .navbar-dark {
+        position: fixed !important;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid rgba(256, 256, 256, 0.1);
+        z-index: 999;
+    }
+
+    .bg-header {
+        background: linear-gradient(rgba(9, 30, 62, 0.7), rgba(9, 30, 62, 0.7)), url(../img/banners/editar.jpg) center center no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px">
+    <div class="row py-5">
+        <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+            <h1 class="display-4 text-white animated zoomIn">Editar Usário</h1>
+        </div>
+    </div>
+</div>
+
+<%= %>
+
+<div class="container mt-5">
+    <div class="col-md-6 mb-5">
+        <a href="/clientes/<%= cliente._id %>" class="btn bg-danger  br-10 text-white">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Cancelar
+        </a>
+    </div>
+    <div class="" id="modaladdcliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999999;">
+        <div class="">
+            <div class="">
+                <div class="">
+                    <h1 class="modal-title" id="exampleModalLabel">
+                        Atualizar Usuário
+                    </h1>
+                </div>
+                <div class="modal-body">
+                    <form action="/atualizar/<%= cliente._id %>" method="post" class="row g-3 needs-validation">
+                        <br>
+                        <span class="text-danger col-form-label-sm">Quando <b>*</b> for usado, significa que o campo é obrigatório.</span>
+                        <hr>
+                        <br>
+                        <h4>Informações Pessoais</h4>
+                        <div class="row">
+                            <div class="mt-2 col-5">
+                                <label for="nome" class="">Nome <span class="text-danger col-form-label-sm">*</span></label>
+                                <input name="nome" value="<%= cliente.info.nome %>" type="text" maxlength="90" class="form-control" style="border-radius: 5px" id="nome" placeholder="Nome" required/>
+                            </div>
+                            <div class="mt-2 col-3">
+                                <label for="dataNascimento" class="">Data de Nascimento</label>
+                                <% const dataNascimento = cliente.info.dataNascimento; %>
+                                <% if (dataNascimento) { %>
+                                    <input name="dataNascimento" type="date" class="form-control" style="border-radius: 5px"
+                                        id="dataNascimento" value="<%= dataNascimento %>" />
+                                <% } else { %>
+                                    <input name="dataNascimento" type="date" class="form-control" style="border-radius: 5px"
+                                        id="dataNascimento" />
+                                <% } %>
+                            </div>                            
+                            <div class="row">
+                                <div class="mt-2 col-5">
+                                    <label for="cpf" class="">CPF <span class="text-danger col-form-label-sm">*</span></label>
+                                    <input name="cpf" value="<%= cliente.info.cpf %>" onkeydown="return mascaranum(event)" type="text" class="form-control" style="border-radius: 5px" id="cpf" placeholder="CPF" required/>
+                                </div>
+                                <div class="mt-2 col-5">
+                                    <label for="rg" class="">RG <span class="text-danger col-form-label-sm">*</span></label>
+                                    <input name="rg" type="text" value="<%= cliente.info.rg %>" maxlength="18" class="form-control" style="border-radius: 5px" id="rg" placeholder="RG" required/>
+                                </div>
+                                <div class="mt-2 col-5">
+                                    <label for="cnpj" class="">CNPJ <span class="text-danger col-form-label-sm">*</span></label>
+                                    <input name="cnpj" maxlength='60' value="<%= cliente.info.cnpj %>" onkeydown="return mascaracpnj(event)" type="text" class="form-control" style="border-radius: 5px" id="cnpj" placeholder="CNPJ" required/>
+                                </div>
+                                <div class="mt-2 col-5">
+                                    <label for="inscricaoEstadual" class="">Inscrição Estadual</label>
+                                    <input name="inscricaoEstadual" value="<%= cliente.info.inscricaoEstadual %>"  type="text" class="form-control"
+                                        style="border-radius: 5px" id="inscricaoEstadual" placeholder="Inscrição Estadual" />
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4>Endereço</h4>
+                        <div class="row">
+                            <div class="mt-2 col-4 gap-1 d-flex flex-column">
+                                <div>
+                                    <label for="cep" class="">CEP</label>
+                                    <input name="cep" type="text" onkeydown="return mascaracep(event)" class="form-control" style="border-radius: 5px" id="cep" placeholder="CEP" value="<%= cliente.info.endereco.cep %>"/>
+                                </div>
+                                <a class="btn btn-primary w-100" onclick="complementarEndereco()">Completar Endereço</a>
+                            </div>
+                            <div class="mt-2 col-4">
+                                <label for="cidade" class="">Cidade</label>
+                                <input name="cidade" type="text" class="form-control" style="border-radius: 5px" id="cidade" placeholder="Cidade" value="<%= cliente.info.endereco.cidade %>"/>
+                            </div>
+                            <div class="mt-2 col-4">
+                                <label for="bairro" class="">Bairro</label>
+                                <input name="bairro" type="text" class="form-control" style="border-radius: 5px" id="bairro" placeholder="Bairro" value="<%= cliente.info.endereco.bairro %>"/>
+                            </div>
+                            <div class="mt-2 col-4">
+                                <label for="endereco" class="">Endereço</label>
+                                <input name="endereco" type="text" class="form-control" style="border-radius: 5px" id="endereco" placeholder="Endereço" value="<%= cliente.info.endereco.cep %>"/>
+                            </div>
+                            <div class="mt-2 col-4">
+                                <label for="uf" class="">UF</label>
+                                <select name="uf" class="form-control" style="border-radius: 5px; background: white;" id="uf" placeholder="Unidade Federativa" value="<%= cliente.info.endereco.uf %>">
+                                    <option value="Não Informado.">Selecione uma Opção</option>
+                                    <option value="AC">AC - Acre</option>
+                                    <option value="AL">AL - Alagoas</option>
+                                    <option value="AP">AP - Amapá</option>
+                                    <option value="AM">AM - Amazonas</option>
+                                    <option value="BA">BA - Bahia</option>
+                                    <option value="CE">CE - Ceará</option>
+                                    <option value="DF">DF - Distrito Federal</option>
+                                    <option value="ES">ES - Espírito Santo</option>
+                                    <option value="GO">GO - Goiás</option>
+                                    <option value="MA">MA - Maranhão</option>
+                                    <option value="MT">MT - Mato Grosso</option>
+                                    <option value="MS">MS - Mato Grosso do Sul</option>
+                                    <option value="MG">MG - Minas Gerais</option>
+                                    <option value="PA">PA - Pará</option>
+                                    <option value="PB">PB - Paraíba</option>
+                                    <option value="PR">PR - Paraná</option>
+                                    <option value="PE">PE - Pernambuco</option>
+                                    <option value="PI">PI - Piauí</option>
+                                    <option value="RJ">RJ - Rio de Janeiro</option>
+                                    <option value="RN">RN - Rio Grande do Norte</option>
+                                    <option value="RS">RS - Rio Grande do Sul</option>
+                                    <option value="RO">RO - Rondônia</option>
+                                    <option value="RR">RR - Roraima</option>
+                                    <option value="SC">SC - Santa Catarina</option>
+                                    <option value="SP">SP - São Paulo</option>
+                                    <option value="SE">SE - Sergipe</option>
+                                    <option value="TO">TO - Tocantins</option>
+                                </select>
+                            </div>
+                            <div class="mt-2 col-4">
+                                <label for="numero" class="">Número</label>
+                                <input name="numero" type="number" class="form-control" style="border-radius: 5px" id="numero" placeholder="Número" value="<%= cliente.info.endereco.numero %>"/>
+                            </div>
+                            <div class="mt-2">
+                                <label for="complemento" class="">Complemento</label>
+                                <input name="complemento" type="text" class="form-control" style="border-radius: 5px" id="complemento" placeholder="Complemento" value="<%= cliente.info.endereco.complemento %>"/>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4>Contato</h4>
+                        <div class="row">
+                            <div class="mt-2 col-4">
+                                <label for="telCelular1" class="">Telefone Celular 1  <span class="text-danger col-form-label-sm">*</span></label>
+                                <input name="telCelular1" type="tel" class="form-control" style="border-radius: 5px"
+                                    id="telCelular1" onkeydown="return mascaraTelefone(event)" placeholder="Telefone Celular 1" required value="<%= cliente.info.contato.telCelular1 %>"/>
+                            </div>
+                            <div class="mt-2 col-4">
+                                <label for="telCelular2" class="">Telefone Celular 2</label>
+                                <input name="telCelular2" type="tel" class="form-control" style="border-radius: 5px"
+                                    id="telCelular2" onkeydown="return mascaraTelefone(event)" placeholder="Telefone Celular 2" value="<%= cliente.info.contato.telCelular2 %>"/>
+                            </div>
+                            <div class="mt-2 col-4">
+                                <label for="telResidencial" class="">Telefone Residencial</label>
+                                <input name="telResidencial" type="tel" class="form-control" style="border-radius: 5px"
+                                    id="telResidencial"  placeholder="Telefone Residencial" value="<%= cliente.info.contato.telResidencial %>"/>
+                            </div>
+                            <div class="mt-2 col-4">
+                                <label for="telComercial" class="">Telefone Comercial</label>
+                                <input name="telComercial" type="tel" class="form-control" style="border-radius: 5px"
+                                    id="telComercial" placeholder="Telefone Comercial" value="<%= cliente.info.contato.telComercial %>"/>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4>Outros</h4>
+                        <div class="accordion" id="accordionFlushExample">
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed=" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                  Complementos
+                                </button>
+                              </h2>
+                              <div id="flush-collapseOne" class="accordion-collapse collapse p-3 rounded" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="row">
+                                    <div class="mt-2 col-4">
+                                        <label for="nomepai" class="">Nome Do Pai</label>
+                                        <input name="nomepai" type="text" class="form-control" style="border-radius: 5px" id="nomepai" placeholder="Nome Do Pai" value="<%= cliente.info.outros.complementos.nomepai %>"/>
+                                    </div>
+                                    <div class="mt-2 col-4">
+                                        <label for="nomemae" class="">Nome da Mãe</label>
+                                        <input name="nomemae" type="nomemae" class="form-control" style="border-radius: 5px"
+                                            id="nomemae" placeholder="Nome da Mãe" value="<%= cliente.info.outros.complementos.nomemae %>"/>
+                                    </div>
+                                    <div class="mt-2 col-4">
+                                        <label for="nomeempresa" class="">Empresa onde Trabalha</label>
+                                        <input name="nomeempresa" type="nomeempresa" class="form-control" style="border-radius: 5px"
+                                            id="nomeempresa" placeholder="Nome da Empresa" value="<%= cliente.info.outros.complementos.nomeempresa %>"/>
+                                    </div>
+                                    <div class="mt-2 col-4">
+                                        <label for="cargoempresa" class="">Cargo na Empresa</label>
+                                        <input name="cargoempresa" type="cargoempresa" class="form-control" style="border-radius: 5px"
+                                            id="cargoempresa" placeholder="Cargo na Empresa" value="<%= cliente.info.outros.complementos.cargoempresa %>"/>
+                                    </div>
+                                    <div class="mt-2 col-4">
+                                        <label for="trabalhadesde" class="">Trabalha da Empresa desde:</label>
+                                        <input name="trabalhadesde" type="date" class="form-control" style="border-radius: 5px"
+                                            id="trabalhadesde" value="<%= cliente.info.outros.complementos.trabaalhadesde %>"/>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mt-2 col-4">
+                                <label for="site" class="">Site</label>
+                                <input name="site" type="text" class="form-control" style="border-radius: 5px" id="site" placeholder="Site" value="<%= cliente.info.outros.site %>"/>
+                            </div>
+                            <div class="mt-2 col-4">
+                                <label for="email" class="">Email</label>
+                                <input name="email" type="email" class="form-control" style="border-radius: 5px"
+                                    id="email" placeholder="Email" value="<%= cliente.info.outros.email %>"/>
+                            </div>
+                        </div>
+                        <div class="mt-2 obs">
+                            <label for="observacoes" class="">Observações</label>
+                            <textarea type="text" name="observacoes" class="form-control" style="border-radius: 5px; padding: 10px 10px 200px 10px ;"
+                            id="observacoes" rows="4" placeholder="Observações"><%= cliente.info.observacoes %></textarea>
+
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary  px-3">
+                                <i class="fa-solid fa-pen"></i> Atualizar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="alertDiv" class="alert alert-danger" style="display: none;">
+        CEP não encontrado. Verifique o CEP inserido.
+    </div>
+    
+</div>
+
+<%- include('../partials/footer'); %>
+<script>
+    const textoTextArea = document.querySelectorAll('.obs p:nth-child(2)');
+    const texto = `<%= cliente.info.observacoes %>`;
+    textoTextArea.forEach(element => {
+        element.textContent = texto;
+    })
+
+
+
+    // Obtém o valor de <%= cliente.info.endereco.uf %>
+    var ufValue = "<%= cliente.info.endereco.uf %>";
+
+    // Obtém o elemento select
+    var selectElement = document.getElementById('uf');
+
+    // Percorre as opções do select
+    var options = selectElement.options;
+    for (var i = 0; i < options.length; i++) {
+        var option = options[i];
+        // Verifica se o valor começa com o valor de ufValue
+        if (option.value.startsWith(ufValue)) {
+            // Define a opção como selecionada
+            option.selected = true;
+            // Saia do loop, pois encontrou a opção correta
+            break;
+        }
+    }
+
+
+
+</script>
