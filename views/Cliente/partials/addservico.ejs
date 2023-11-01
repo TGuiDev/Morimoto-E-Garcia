@@ -3,44 +3,22 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    Gerenciamento de Login
+                    Adicionar Serviço
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="/addservico/<%= cliente._id %>" method="post">
                     <div class="mb-3">
-                        <label for="newnomelogin" class="form-label">Serviço Prestado</label>
-                        <input name="newnomelogin" type="text" class="form-control" style="border-radius: 5px"
-                            id="newnomelogin" placeholder="Nome de Usuário" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="newemaillogin" class="form-label">Valor</label>
-                        <input name="newemaillogin" type="email" class="form-control" style="border-radius: 5px"
-                            id="newemaillogin" placeholder="Email de Acesso" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="newsenhalogin" class="form-label">Senha</label>
-                        <input name="newsenhalogin" type="password" class="form-control"
-                            style="border-radius: 5px" id="newsenhalogin" placeholder="Senha de Acesso" />
-                    </div>
-                    <!-- <input name="newacessologin" type="text" class="form-control" style="border-radius: 5px" id="newacessologin" placeholder="Nível de acesso" /> -->
-                    <div class="mb-3">
-                        <label for="newacessologin" class="form-label">Nível de Acesso</label>
-                        <select class="form-select" name="newacessologin" id="newacessologin">
-                            <option selected>Selecionar Nível</option>
-                            <option value= "U">Usuário Padrão</option>
-                            <option value= "A">Administrador</option>
-                            <option value="SA">Super Administrador</option>
-                        </select>
+                        <label for="newnomelogin" class="form-label">Em Breve!</label>
                     </div>
                     <div class="text-end">
                         <button type="button" class="btn btn-danger px-3" data-bs-dismiss="modal">
-                            <i class="fa-solid fa-circle-xmark"></i> Cancelar
+                            <i class="fa-solid fa-circle-xmark"></i> Sair
                         </button>
-                        <button type="submit" class="btn btn-success px-3">
+                        <!-- <button type="submit" class="btn btn-success px-3">
                             <i class="fa-solid fa-circle-plus"></i> Criar
-                        </button>
+                        </button> -->
                     </div>
                 </form>
             </div>

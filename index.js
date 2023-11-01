@@ -132,8 +132,6 @@ app.listen(porta, async () => {
 
 
 
-
-
 // const Cliente = require('./schemas/cliente');
 // const Admin = require('./schemas/admin');
 

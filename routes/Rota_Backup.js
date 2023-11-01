@@ -6,8 +6,9 @@ const Cliente = require('../schemas/cliente');
 const Admin = require('../schemas/admin');
 const Form = require('../schemas/form');
 const Noticia = require('../schemas/noticia');
+const VerificarLogin = require('../middleware/VerificarLogin');
 
-router.get('/', async (req, res) => {
+router.get('/', VerificarLogin, async (req, res) => {
   try {
     // Crie um objeto para armazenar os dados que você deseja fazer backup
     const dataToBackup = {
@@ -44,7 +45,7 @@ router.get('/', async (req, res) => {
     // Crie o arquivo de backup
     fs.writeFileSync(backupFilePath, jsonData);
 
-    console.log('Backup criado com sucesso em:', backupFilePath);
+    // console.log('Backup criado com sucesso em:', backupFilePath);
     // res.status(200).send('Backup criado com sucesso em: ' + backupFilePath);
     res.redirect('/painel-admin?success=Backup criado com sucesso!')
   } catch (error) {

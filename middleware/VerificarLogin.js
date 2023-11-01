@@ -5,7 +5,7 @@ async function VerificarLogin(req, res, next) {
     if (req.session.user) {
       next();
     } else {
-      res.redirect('/login');
+      res.redirect('/login?success=Opa! Primeiro faça login.');
     }
   } catch (err) {
     console.log(err);

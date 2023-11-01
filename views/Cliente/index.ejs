@@ -17,6 +17,12 @@
     }
 </style>
 
+<% if (successMessage) { %>
+    <div class="alert alert-success" id="success">
+        <%= successMessage %>
+    </div>
+<% } %>
+
 <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px">
     <div class="row py-5">
         <div class="col-12 pt-lg-5 mt-lg-5 text-center">
@@ -33,9 +39,9 @@
             </a>
         </div>
         <div class="col-md-6 text-end">
-            <a href="#" class="btn bg-success br-10 text-white">
+            <button class="btn btn-success text-white " data-bs-toggle="modal" id="btnAddServico" data-bs-target="#modaladdservico">
                 <i class="fa fa-plus" aria-hidden="true"></i> Adicionar Serviço
-            </a>
+            </button>
             <!-- <a href="/deletar/<%= cliente._id %>" id="btnDeletar" class="btn bg-danger br-10 text-white">
                 <i class="fa fa-trash" aria-hidden="true"></i> Deletar Cliente
             </a> -->
@@ -140,66 +146,12 @@
     
 </div>
 
-<!-- <button class="btn btn-primary btn-print" onclick="imprimirPerfil()">Imprimir Perfil</button> -->
-
 <%- include('./partials/excluir'); %>
+<%- include('./partials/addservico'); %>
 <%- include('../partials/footer'); %>
 
 
 <script>
-    function imprimirPerfil() {
-    // Define as opções da janela pop-up
-    const opcoes = 'width=1600,height=1200,toolbar=no,scrollbars=no,resizable=yes';
-
-    // Abre a janela pop-up
-    const janelaDeImpressao = window.open('', '', opcoes);
-
-    // Verifique se a janela foi aberta com sucesso
-    if (janelaDeImpressao) {
-        // Crie o conteúdo HTML para a folha de impressão
-        const conteudoImprimir = `
-            <!DOCTYPE html>
-            <html lang="pt-BR">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="seu-estilo.css">
-            </head>
-            <body>
-                <div class="container mt-5">
-                    DECLARAÇÃO DE ESTADO DE POBREZA PARA FINS JUDICIAIS
-
-
-                    ELTON  RODRIGO DA SILVA, brasileiro, solteiro, operador de empilhadeira desempregado, portador da cédula de identidade RG/SSP nº: 46.805.651-8, inscrito no CPF/MF nº: 315.157.858-66, residente e domiciliado à Rua Alfredo Balsachi, 05, Santa Clara Espírito Santo do Pinhal, São Paulo, CEP: 13.990-000, venho declarar que, em razão de minha atual condição financeira, não tenho condições de arcar com nenhum tipo de pagamento de custos processuais, sob pena de implicar em prejuízo próprio e de minha família, nos termos do Art. 5º, LXXIV, da Constituição da República, da Lei nº 1.060/50, bem como nos artigos 82 e 98 do Novo Código de Processo Civil.
-
-                    Reiterando minha incapacidade de custear quaisquer ações, quero solicitar, ainda, que tal benefício abranja todos os atos do processo, de acordo com o artigo 98 do novo Código de Processo Civil. 
-                      
-                     
-                                Espírito Santo do Pinhal, 06 de setembro de 2023.
-
-                    
-                                                
-                                ELTON  RODRIGO DA SILVA
-                </div>
-            </body>
-            </html>
-        `;
-
-        // Escreva o conteúdo na janela pop-up
-        janelaDeImpressao.document.write(conteudoImprimir);
-
-        // Fecha a janela pop-up após a impressão
-        janelaDeImpressao.onafterprint = function () {
-            janelaDeImpressao.close();
-        };
-
-        // Iniciar a função de impressão na janela pop-up
-        janelaDeImpressao.print();
-    } else {
-        alert("Por favor, desabilite o bloqueio de pop-ups para imprimir.");
-    }
-}
-
 
 function formatDate(date) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -218,8 +170,5 @@ const dataNascElements = document.querySelectorAll('.testeee');
 dataNascElements.forEach(element => {
     element.textContent = formatDate(element.textContent);
 });
-
-
-
 
 </script>

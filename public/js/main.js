@@ -356,3 +356,21 @@ function complementarEndereco() {
     }, 5000);
   }
 }
+
+
+
+// Remover o aviso Success
+
+// Verifique se há uma mensagem de sucesso
+if (successMessage) {
+  // Encontre o elemento da mensagem de sucesso
+  var successElement = document.getElementById("success");
+
+  // Verifique se o elemento foi encontrado
+  if (successElement) {
+      // Defina um temporizador para esconder o elemento após 5 segundos
+      setTimeout(function () {
+          successElement.style.display = "none";
+      }, 5000); // 5000 milissegundos = 5 segundos
+  }
+}
