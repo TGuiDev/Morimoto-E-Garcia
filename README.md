@@ -78,7 +78,7 @@ Este projeto está licenciado sob a [MIT License](LICENSE). Veja o arquivo LICEN
 
 ## Contato
 
-- **Desenvolvedor**: [TGuiDev](https://github.com/TGuiDev) - tguidev@example.com
+- **Desenvolvedor**: [TGuiDev](https://github.com/TGuiDev) - guirosaah@gmail.com
 - **Issues**: Abra uma issue no GitHub para reportar bugs ou sugerir melhorias.
 
 Obrigado por visitar o repositório! Se precisar de ajuda, entre em contato.
